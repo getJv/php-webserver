@@ -22,8 +22,7 @@ RUN apk --no-cache --update --virtual add  \
 
 RUN docker-php-ext-install \ 
     mysqli \
-    pdo_mysql \
-    zip
+    pdo_mysql 
     
 # install xdebug, make sure to choose the desired start_with_request option
 # https://stackoverflow.com/questions/31583646/cannot-find-autoconf-please-check-your-autoconf-installation-xampp-in-centos
@@ -33,10 +32,9 @@ RUN apk  --no-cache --update --virtual add \
     && docker-php-ext-enable xdebug \
     && echo "xdebug.mode=debug" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "xdebug.idekey=VSCODE" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.discover_client_host=0" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "xdebug.client_host=host.docker.internal" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-    && echo "xdebug.remote_connect_back=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "xdebug.log=/var/www/html/xdebug.log" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-    && echo "xdebug.remote_port=9009" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "#choose only one mode and comment the other" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "# Start only when the param XDEBUG_TRIGGER is present on POST, GET or COOKIE" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "#xdebug.start_with_request=trigger" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
@@ -53,5 +51,14 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
 
 # Image Cleaner
 RUN rm -rf /var/cache/apk/*
+
+
+#Laravel Installation
+ENV ENV="/home/dev/.ashrc"
+USER dev
+RUN composer global require laravel/installer 
+RUN	echo 'alias laravel="~/.composer/vendor/bin/laravel"' >> /home/dev/.ashrc 
+USER root
+
 
 CMD ["php-fpm"]
