@@ -72,11 +72,12 @@ USER root
 2. Remove the default public folder: `docker exec --user dev php rm -Rf public`
 3. Clone your project at `workspace folder`
 4. Move your project files from you project folder to the `workspace` folder: `mv <YOUR_FOLDER_NAME>/* <YOUR_FOLDER_NAME>/.[!.]* .`
-5. Remove the fresh_project folder: `rm -Rf <YOUT_FOLDER_NAME>`
+5. Remove the fresh_project folder: `rm -Rf <YOUR_FOLDER_NAME>`
 6. Code something amazing.
 
 ## Useful commands
 
 - Access as dev user: `docker exec -it --user dev php sh `
 - Help to find the host/docker ip for xdebug: `netstat -nr | grep '^0\.0\.0\.0' | awk '{print $2}'`
+- Xdebug.log: `docker exec php tail -f /tmp/xdebug.log`
 - Bundle shortcut for Dockerfile tests: `docker compose down && docker rmi getjv/php-fpm && docker build -t getjv/php-fpm --build-arg USER_ID=$(id -u) --build-arg GROUP_ID=$(id -g) . && docker compose up -d`

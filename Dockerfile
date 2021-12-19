@@ -34,15 +34,15 @@ RUN apk  --no-cache --update --virtual add \
     && echo "xdebug.idekey=VSCODE" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "xdebug.discover_client_host=0" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "xdebug.client_host=host.docker.internal" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-    && echo "xdebug.log=/var/www/html/xdebug.log" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "#choose only one mode and comment the other" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "# Start only when the param XDEBUG_TRIGGER is present on POST, GET or COOKIE" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "#xdebug.start_with_request=trigger" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "# Start debug on each request" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "xdebug.start_with_request=yes" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-    && touch /var/www/html/xdebug.log \
-    && chown dev:www-data /var/www/html/xdebug.log \
-    && chmod 775 /var/www/html/xdebug.log \
+    && echo "xdebug.log=/tmp/xdebug.log" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && touch /tmp/xdebug.log \
+    && chown dev:www-data /tmp/xdebug.log \
+    && chmod 775 /tmp/xdebug.log \
     && rm -rf /tmp/pear; apk del autoconf g++ make;
 
 # Composer install
@@ -58,7 +58,5 @@ ENV ENV="/home/dev/.ashrc"
 USER dev
 RUN composer global require laravel/installer 
 RUN	echo 'alias laravel="~/.composer/vendor/bin/laravel"' >> /home/dev/.ashrc 
-USER root
-
 
 CMD ["php-fpm"]
