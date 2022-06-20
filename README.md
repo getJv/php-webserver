@@ -81,3 +81,11 @@ USER root
 - Help to find the host/docker ip for xdebug: `netstat -nr | grep '^0\.0\.0\.0' | awk '{print $2}'`
 - Xdebug.log: `docker exec php tail -f /tmp/xdebug.log`
 - Bundle shortcut for Dockerfile tests: `docker compose down && docker rmi getjv/php-fpm && docker build -t getjv/php-fpm --build-arg USER_ID=$(id -u) --build-arg GROUP_ID=$(id -g) . && docker compose up -d`
+
+## License
+
+The source code for the site is licensed under the MIT license, which you can find in
+the MIT-LICENSE.txt file.
+
+All graphical assets are licensed under the
+[Creative Commons Attribution 3.0 Unported License](https://creativecommons.org/licenses/by/3.0/).
