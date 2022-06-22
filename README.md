@@ -8,7 +8,22 @@ This is my personal PHP webserver Image. Here is all most cool and essential php
 2. Go to project root folder: `cd php-webserver`
 3. Build the Image: `docker build -t getjv/php-fpm --build-arg USER_ID=$(id -u) --build-arg GROUP_ID=$(id -g) .`
 4. Turn the containers on: `docker compose up -d`
-5. Access the `http://localhost`
+5. Access the `http://localhost`  
+6. By default the webserver bring two default projects configurated. BUT you should edit you vhost file to add the alias to `http://project1.local` or `http://project2.local`
+   ```bash
+   # [... lines omitted]
+   # Example of /etc/hosts or vhost file on Windows system.
+   127.0.0.1       localhost
+   127.0.0.1       project1.local
+   127.0.0.1       project2.local
+   # [... lines omitted]
+   ```
+
+## Multiple hosts webserver
+
+This Ngnix Webserver were build to suport multiples project.
+To add a new project you only need to add a new config file under `/config/nginx` mapping the root location folder. And you project foldr should be under `/workspace`.
+
 
 ## Set X-Debug int VS Code
 

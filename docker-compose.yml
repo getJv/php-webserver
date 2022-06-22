@@ -6,7 +6,7 @@ services:
     ports:
       - 80:80
     volumes:
-      - ./config/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./config/nginx:/etc/nginx/conf.d
       - ./workspace:/var/www/html
     links:
       - php

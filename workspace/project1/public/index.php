@@ -2,6 +2,7 @@
     $a = 2;
     $b = $a + 2;
 ?>
+<h1>PROJECT 1</h1>
 <a href="/">PHP INFO</a> | 
 <a href="/?xdebug">XDEBUG INFO</a>
 
