@@ -1,2 +1,4 @@
 .vscode/
 workspace/xdebug.log
+.idea
+*DS_store
