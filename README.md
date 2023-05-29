@@ -7,9 +7,9 @@ This is my personal PHP webserver Image. Here is all most cool and essential php
 1. Checkout the template project: `git clone https://github.com/getJv/php-webserver.git`
 2. Go to project root folder: `cd php-webserver`
 3. chose the branch to mac-users `git checkout mac-system` 
-3. Build the Image: `docker build -t getjv/php-fpm --build-arg USER_ID=$(id -u) --build-arg GROUP_ID=$(id -g) ..`
-4. Turn the containers on: `docker compose up -d`
-5. Access the `http://localhost`
+4. Build the Image: `docker build -t getjv/php-fpm --build-arg USER_ID=$(id -u) --build-arg GROUP_ID=$(id -g) ..`
+5. Turn the containers on: `docker compose up -d`
+6. Access the `http://localhost`
 
 ## Adding new projects to webserver
 
@@ -36,7 +36,13 @@ This is my personal PHP webserver Image. Here is all most cool and essential php
    This is exemple how it should like:
    ```bash
    # /etc/hosts
+   #others configs[...]
+   
+   127.0.0.1       my-new-project-2.test
+   127.0.0.1       localhost
+   255.255.255.255 broadcasthost
    ```
+3. now access http://my-new-project-2.test and your browser will load the proper project
 
 ## Set X-Debug int VS Code
 
