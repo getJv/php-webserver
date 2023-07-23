@@ -25,7 +25,9 @@ RUN apk --no-cache --update add  \
     nano \
     wget \
     unzip \
-    bash
+    bash \
+    nodejs \
+    npm
 
 RUN docker-php-ext-install  mysqli pdo_mysql \
     && docker-php-ext-enable mysqli pdo_mysql
@@ -62,28 +64,29 @@ RUN apk  --no-cache --update --virtual add \
     && chmod 775 /tmp/xdebug.log \
     && rm -rf /tmp/pear; apk del autoconf g++ make;
 
+
 # add extras features
 # RUN apk --no-cache add file  zip openssh
 
 # install pack to work with timezone, intl, encode and set LD_PRELOAD env to make iconv work fully on Alpine image.
-#RUN apk add --no-cache icu-dev gnu-libiconv gettext tzdata \
-#    && docker-php-ext-configure intl \
-#    && docker-php-ext-install intl \
-#    && docker-php-ext-enable intl
-#ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so
+RUN apk add --no-cache icu-dev gnu-libiconv gettext tzdata \
+    && docker-php-ext-configure intl \
+    && docker-php-ext-install intl \
+    && docker-php-ext-enable intl
+ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so
 
 # Enable php to do complex math operations
 #RUN docker-php-ext-install bcmath \
 #    && docker-php-ext-enable bcmath
 
 # enable work with redis
-#RUN pecl install redis \
-#    && docker-php-ext-enable redis.so
+RUN pecl install redis \
+    && docker-php-ext-enable redis.so
 
 # enable work with rabbitmq
-#RUN apk add --no-cache rabbitmq-c-dev \
-#    && pecl install amqp \
-#    && docker-php-ext-enable amqp
+RUN apk add --no-cache rabbitmq-c-dev \
+    && pecl install amqp \
+    && docker-php-ext-enable amqp
 
 # enable work with soap
 #RUN docker-php-ext-install  soap \
