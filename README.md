@@ -1,4 +1,4 @@
-# Getjv PHP-WEBSERVER Image for MacOs users
+# Getjv PHP-WEBSERVER Image for MacOs users (to linux check the linux branch)
 
 This is my personal PHP webserver Image. Here is all most cool and essential php tool I use in regular projects
 
