@@ -69,7 +69,7 @@ RUN apk  --no-cache --update --virtual add \
 # RUN apk --no-cache add file  zip openssh
 
 # install pack to work with timezone, intl, encode and set LD_PRELOAD env to make iconv work fully on Alpine image.
-RUN apk add --no-cache icu-dev gnu-libiconv gettext tzdata \
+RUN apk add --no-cache icu-dev gnu-libiconv gettext tzdata icu-data-full \
     && docker-php-ext-configure intl \
     && docker-php-ext-install intl \
     && docker-php-ext-enable intl
