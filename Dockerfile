@@ -27,7 +27,8 @@ RUN apk --no-cache --update add  \
     unzip \
     bash \
     nodejs \
-    npm
+    npm \ 
+    busybox-suid
 
 RUN docker-php-ext-install  mysqli pdo_mysql \
     && docker-php-ext-enable mysqli pdo_mysql
